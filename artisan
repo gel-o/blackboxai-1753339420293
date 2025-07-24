@@ -1,0 +1,29 @@
+#!/usr/bin/env php
+<?php
+
+/**
+ * Laravel - A PHP Framework For Web Artisans.
+ *
+ * This file is the command-line interface for your Laravel application.
+ */
+
+// Start measuring the application start time.
+define('LARAVEL_START', microtime(true));
+
+// Autoload Composer dependencies.
+require __DIR__ . '/vendor/autoload.php';
+
+// Bootstrap the application.
+$app = require_once __DIR__ . '/bootstrap/app.php';
+
+// Run the Console Kernel.
+$kernel = $app->make(Illuminate\Contracts\Console\Kernel::class);
+
+$status = $kernel->handle(
+    $input = new Symfony\Component\Console\Input\ArgvInput,
+    new Symfony\Component\Console\Output\ConsoleOutput
+);
+
+$kernel->terminate($input, $status);
+
+exit($status);
